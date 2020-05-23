@@ -1,4 +1,3 @@
-ちょっと無理やりエラー表示するようにした
 from discord.ext import commands
 import os
 import traceback

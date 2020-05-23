@@ -67,7 +67,11 @@ async def on_message(message):
         for channel in global_channels:
             # メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
-
+@bot.event
+async def on_ready():
+    # discordのあれ
+    prefix = "(サポートサーバー GdfkgGF8をプレイ中)"
+    await commands.change_presence(activity=discord.Game(name=f"(Python)ヘルプは『{prefix}.help』だ"))
+    # discordのあれ
 bot.run(token)
  
-bot.run(token)

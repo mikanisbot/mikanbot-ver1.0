@@ -27,6 +27,7 @@ bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
 
+
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
@@ -73,5 +74,15 @@ async def on_ready():
     prefix = "(サポートサーバー GdfkgGF8をプレイ中)"
     await commands.change_presence(activity=discord.Game(name=f"(Python)ヘルプは『{prefix}.help』だ"))
     # discordのあれ
+    
+    @bot.command(name="ログアウト")
+@commands.is_owner()
+async def restart(ctx):
+    if ctx.message.author.id ==713583564138217514 :  # このidのとこは自身のIDに変更してね
+        await ctx.send(embed=discord.Embed(title="シャットダウン！", description="終了する！(Python版)", color=color))
+        await bot.logout()
+    else:
+        color = random.randint(0x000000, 0xffffff)
+        await ctx.send(embed=discord.Embed(title="違う！", description="お前……。", color=color))
 bot.run(token)
  

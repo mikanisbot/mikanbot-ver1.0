@@ -38,13 +38,33 @@ async def on_command_error(ctx, error):
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
+若干のバグは残ってるけどいいよね
+その時直せば
+from discord.ext import commands
+import os
+import traceback
+
+bot = commands.Bot(command_prefix='/')
+token = os.environ['DISCORD_BOT_TOKEN']
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    orig_error = getattr(error, "original", error)
+    error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
+    await ctx.send(error_msg)
+
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send('pong')
 
 @bot.event
 async def on_message(message):
     if message.author.bot:
         # もし、送信者がbotなら無視する
         return
-    GLOBAL_CH_NAME = "Mikanglobal" # グローバルチャットのチャンネル名
+    GLOBAL_CH_NAME = "mikan-global" # グローバルチャットのチャンネル名
 
     if message.channel.name == GLOBAL_CH_NAME:
         # hoge-globalの名前をもつチャンネルに投稿されたので、メッセージを転送する
@@ -68,6 +88,10 @@ async def on_message(message):
         for channel in global_channels:
             # メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
+
+bot.run(token)
+ 
+
 @bot.event
 async def on_ready():
     # discordのあれ

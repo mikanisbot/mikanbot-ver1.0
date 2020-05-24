@@ -17,7 +17,6 @@ async def on_command_error(ctx, error):
 async def ping(ctx):
     await ctx.send('pong')
 
-@bot.event
 async def on_message(message):
     try:
         if message.author.bot:
@@ -50,4 +49,5 @@ async def on_message(message):
     except Exception as error:
         await on_command_error(message.channel,error)
 
+bot.on_message = on_message
 bot.run(token)

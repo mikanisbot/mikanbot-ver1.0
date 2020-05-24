@@ -50,4 +50,11 @@ async def on_message(message):
         await on_command_error(message.channel,error)
 
 bot.on_message = on_message
+
+@bot.command(pass_context=True)
+async def ping2(msg):  # 処理時間を返す
+    startt = time.time()
+    tmp = await msg.channel.send("計測中……!")
+    await tmp.edit(content="pong！\n結果:**" + str(round(time.time()-startt, 3))+"**秒だ！")
+
 bot.run(token)

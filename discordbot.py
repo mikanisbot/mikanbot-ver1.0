@@ -5,6 +5,8 @@ import traceback
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
+bot.teams = [546682137240403984]
+
 
 @bot.event
 async def on_command_error(ctx, error):
